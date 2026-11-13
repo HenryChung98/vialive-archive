@@ -53,7 +53,7 @@ Apple Watch 앱은 **운동 타이머 Plus** 기능이며 watchOS 26 이상이 �
 - 대표자: 정현규
 - 사업자등록번호: 478-18-02792
 - 이메일: henrychung.dev@gmail.com
-- 호스팅 서비스 제공자: GitHub (GitHub Pages)
+- 호스팅 서비스 제공자: Cloudflare (Cloudflare Workers)
 
 ## 자주 묻는 질문
 

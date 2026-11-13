@@ -1,0 +1,19 @@
+# vialive.app: the Astro build in dist/, served by a Cloudflare Worker with static assets (no Worker code).
+# Deploys from .github/workflows/deploy.yml on every push to main, or locally with `pnpm run deploy`.
+name = "vialive-site"
+compatibility_date = "2025-10-01"
+# Serve only on vialive.app, not on a second *.workers.dev address.
+workers_dev = false
+preview_urls = false
+
+[assets]
+directory = "./dist"
+# Astro builds every page as <path>/index.html (trailingSlash: "always"), so /foo redirects to /foo/.
+html_handling = "auto-trailing-slash"
+# Missing paths get dist/404.html with a 404 status, as on GitHub Pages.
+not_found_handling = "404-page"
+
+# Custom domain: Cloudflare creates the DNS record for it. Keep in sync with `site` in astro.config.mjs.
+[[routes]]
+pattern = "vialive.app"
+custom_domain = true
