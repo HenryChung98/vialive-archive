@@ -1,0 +1,128 @@
+---
+// iPhone Lock Screen with Live Activities, drawn to match the App Store screenshots.
+// Every size is in cqw (percent of the phone's width), so the whole mockup scales with the `class` width.
+import { ui, type Locale } from "@/i18n/ui"
+import { ArrowUpDown, BatteryFull, Camera, Flashlight, Minus, Pause, Plus, RotateCcw, Signal, Wifi } from "lucide-react"
+
+interface Props {
+  class?: string
+  // Which apps' Live Activities to show, by slug. An app without a drawn activity shows an empty Lock Screen.
+  apps?: string[]
+  // Bottom (as on a real Lock Screen) or just under the clock, for crops that cut off the bottom of the phone.
+  activitiesAt?: "bottom" | "middle"
+  // Play the entrance animation (rise, screen on, activities pop in).
+  intro?: boolean
+}
+
+const { class: className, apps = ["workout-timer", "currency-converter"], activitiesAt = "bottom", intro = false } = Astro.props
+const home = ui[(Astro.currentLocale ?? "en") as Locale].home
+const { workout, currency } = home.liveActivity
+const circle = "flex shrink-0 items-center justify-center rounded-full"
+---
+
+<div aria-hidden="true" class:list={[intro && "phone-in", "@container relative aspect-[9/19] text-left text-white select-none", className]}>
+  <!-- Frame and screen -->
+  <div class="absolute inset-0 rounded-[15cqw] border border-white/15 bg-[#0a0a0c] shadow-[0_3cqw_12cqw_rgba(0,0,0,0.5)]">
+    <div
+      class:list={[intro && "screen-on", "absolute inset-[3.2cqw] overflow-hidden rounded-[12cqw] bg-[radial-gradient(circle_at_50%_56%,#1d4f86_0%,#0e2546_32%,#070c18_68%)]"]}
+    >
+      <div class="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#1c3f94] to-transparent"></div>
+      <!-- Concentric rings -->
+      {
+        [42, 76, 112, 150].map((d, i) => (
+          <span
+            data-ring class="absolute top-[56%] left-1/2 -translate-1/2 rounded-full border border-sky-400/45"
+            style={`width:${d}cqw;height:${d}cqw;opacity:${0.9 - i * 0.2};box-shadow:0 0 4cqw rgba(56,152,236,${0.18 - i * 0.04})`}
+          />
+        ))
+      }
+      <!-- Dynamic Island and status bar -->
+      <div class="absolute top-[2.6cqw] left-1/2 h-[8.8cqw] w-[30cqw] -translate-x-1/2 rounded-full bg-black"></div>
+      <div class="absolute top-[4.6cqw] right-[7cqw] flex items-center gap-[1.4cqw] [&_svg]:size-[4.4cqw]">
+        <Signal strokeWidth={3} />
+        <Wifi strokeWidth={3} />
+        <BatteryFull strokeWidth={2.5} />
+      </div>
+      <!-- Date and time -->
+      <p class="absolute top-[18cqw] w-full text-center text-[5cqw] font-semibold text-white/90">{home.lockDate}</p>
+      <p class="absolute top-[23cqw] w-full text-center text-[23cqw] leading-none font-bold tracking-tight text-white/95">9:41</p>
+      <!-- Flashlight and camera -->
+      <span class:list={[circle, "absolute bottom-[6cqw] left-[11cqw] size-[11cqw] bg-white/10 [&_svg]:size-[5cqw]"]}><Flashlight /></span>
+      <span class:list={[circle, "absolute right-[11cqw] bottom-[6cqw] size-[11cqw] bg-white/10 [&_svg]:size-[5cqw]"]}><Camera /></span>
+      <span class="absolute bottom-[2.2cqw] left-1/2 h-[1.1cqw] w-[34cqw] -translate-x-1/2 rounded-full bg-white/90"></span>
+    </div>
+  </div>
+
+  <!-- Live Activities: wider than the phone, like the screenshots -->
+  <div data-activities class:list={["absolute inset-x-[-9cqw] space-y-[3cqw]", activitiesAt === "bottom" ? "bottom-[21cqw]" : "top-[56cqw]"]}>
+    <!-- Workout Timer -->
+    {apps.includes("workout-timer") && (
+    <div class:list={[intro && "la-in", "flex items-center gap-[3cqw] rounded-[6cqw] border border-white/10 bg-[#1e2431]/95 p-[3.6cqw] pl-[5cqw] shadow-xl"]}>
+      <div class="min-w-0 flex-1">
+        <p class="text-[4.2cqw] text-white/60">{workout.mode}</p>
+        <p class="text-[11cqw] leading-tight font-medium text-[#34c759] tabular-nums">{workout.time}</p>
+      </div>
+      <div class="min-w-0 flex-1">
+        <p class="text-[4.2cqw] text-white/60">{workout.roundsLabel}</p>
+        <p class="text-[11cqw] leading-tight font-medium tabular-nums">{workout.rounds}</p>
+      </div>
+      <span class:list={[circle, "size-[14cqw] bg-[#4a5263] [&_svg]:size-[6cqw]"]}><Plus strokeWidth={2.5} /></span>
+      <span class:list={[circle, "size-[14cqw] bg-[#2f7bff] [&_svg]:size-[6cqw] [&_svg]:fill-current"]}><Pause strokeWidth={0} /></span>
+    </div>
+    )}
+
+    <!-- Currency Converter -->
+    {apps.includes("currency-converter") && (
+    <div class:list={[intro && "la-in la-2", "flex items-center gap-[3cqw] rounded-[6cqw] border border-white/10 bg-[#1e2431]/95 p-[4cqw] pl-[5cqw] shadow-xl"]}>
+      <div class="min-w-0 flex-1">
+        <p class="text-[4.4cqw] font-medium tabular-nums">{currency.from}</p>
+        <span class:list={[circle, "my-[1cqw] size-[6cqw] bg-[#3fb3ff] text-[#1e2431] [&_svg]:size-[4cqw]"]}><ArrowUpDown strokeWidth={3} /></span>
+        <p class="text-[7.4cqw] leading-tight font-bold whitespace-nowrap text-[#3fb3ff] tabular-nums">{currency.to}</p>
+      </div>
+      <div class="grid grid-cols-3 items-center justify-items-center gap-x-[2.4cqw] gap-y-[2.4cqw] text-[4.2cqw]">
+        <span class:list={[circle, "size-[10cqw] bg-[#4a5263] [&_svg]:size-[4.4cqw]"]}><Minus strokeWidth={3} /></span>
+        <span class="tabular-nums">{currency.step}</span>
+        <span class:list={[circle, "size-[10cqw] bg-[#2b3140] [&_svg]:size-[4.4cqw]"]}><Plus strokeWidth={3} /></span>
+        <span class:list={[circle, "size-[10cqw] bg-[#4a5263] text-[2.6cqw] font-semibold"]}>{currency.minus}</span>
+        <span class:list={[circle, "size-[10cqw] bg-[#3fb3ff] text-[#1e2431] [&_svg]:size-[5cqw]"]}><RotateCcw strokeWidth={3} /></span>
+        <span class:list={[circle, "size-[10cqw] bg-[#2f7bff] text-[2.6cqw] font-semibold ring-[0.8cqw] ring-white/20"]}>{currency.plus}</span>
+      </div>
+    </div>
+    )}
+  </div>
+</div>
+
+<style>
+  /* Entrance: phone rises (0.1–0.9s), screen wakes (0.5s), Live Activities pop in one after another (0.9s, 1.05s). */
+  @media (prefers-reduced-motion: no-preference) {
+    .phone-in {
+      animation: phone-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+    }
+    .screen-on {
+      animation: screen-on 0.6s ease-out 0.5s both;
+    }
+    .la-in {
+      animation: la-in 0.55s cubic-bezier(0.34, 1.4, 0.64, 1) 0.9s both;
+    }
+    .la-2 {
+      animation-delay: 1.05s;
+    }
+  }
+  @keyframes phone-in {
+    from {
+      opacity: 0;
+      transform: perspective(1200px) translateY(30%) scale(0.9) rotateX(18deg);
+    }
+  }
+  @keyframes screen-on {
+    from {
+      filter: brightness(0.15);
+    }
+  }
+  @keyframes la-in {
+    from {
+      opacity: 0;
+      transform: translateY(40%) scale(0.85);
+    }
+  }
+</style>

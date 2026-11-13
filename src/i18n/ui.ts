@@ -3,8 +3,23 @@ export const contactEmail = "henrychung.dev@gmail.com"
 export const ui = {
   en: {
     homeTitle: "iPhone Apps for Live Activities",
-    tagline: "Privacy Policy and Support for our apps for iPhone with Live Activities",
-    appsHeading: "Apps",
+    tagline:
+      "Simple iPhone apps that keep what matters on your Lock Screen with Live Activities.",
+    appsHeading: "All Apps",
+    // Root page. The mockups show sample Live Activity content, so they live here rather than in each app's entry.
+    home: {
+      heroTitle: ["Right on your Lock Screen,", "no need to open the app"],
+      lockDate: "Friday, October 9",
+      // Sample Live Activity values, matching the App Store screenshots.
+      liveActivity: {
+        workout: { mode: "AMRAP", time: "7:57", roundsLabel: "Rounds", rounds: "3" },
+        currency: { from: "50 USD", to: "42.94 EUR", step: "×1,000", minus: "-1,000", plus: "+1,000" },
+      },
+      comingSoon: "Coming soon",
+      // Mobile-only switch between the slider and a grid of all apps.
+      viewSlider: "Slide through apps",
+      viewGrid: "Show all apps",
+    },
     otherLocale: "한국어",
     appStore: "Download on the App Store",
     // Official artwork from Apple's Marketing Tools; the guidelines forbid modifying it. Width is for a 48px height.
@@ -24,28 +39,45 @@ export const ui = {
     searchEmpty: "No results found.",
     menu: "Menu",
     contactTitle: "Contact",
-    contactDescription: "Tap the button to open a pre-filled email. Please fill in each line so we can look into it.",
+    contactDescription:
+      "Tap the button to open a pre-filled email. Please fill in each line so we can look into it.",
     emailUs: "Email us",
     emailBody: "iPhone model:\niOS version:\nApp version:\n\nWhat happened:\n",
     apps: [
       {
         slug: "currency-converter",
         name: "Currency Converter",
-        description: "Convert currencies right from Live Activities, the Dynamic Island, and Apple Watch.",
-        appStore: "https://apps.apple.com/us/app/currency-converter-vialive/id6814764703",
+        description:
+          "Check exchange rates easily wherever your travels take you.",
+        appStore:
+          "https://apps.apple.com/us/app/currency-converter-vialive/id6814764703",
       },
       {
         slug: "workout-timer",
         name: "Workout Timer",
-        description: "Interval, rest, and AMRAP timers you can control from Live Activities, the Dynamic Island, and Apple Watch.",
+        description:
+          "Use Interval, Rest, and AMRAP timers with ease.",
         appStore: "https://apps.apple.com/us/app/id6829184635",
       },
     ],
   },
   ko: {
     homeTitle: "Live Activity 아이폰 앱",
-    tagline: "Live Activities를 지원하는 iPhone용 앱의 개인정보 처리방침과 지원 페이지입니다.",
-    appsHeading: "앱",
+    tagline:
+      "Live Activities로 필요한 정보를 잠금 화면에 바로 보여주는 심플한 iPhone 앱들.",
+    appsHeading: "모든 앱",
+    home: {
+      heroTitle: ["앱을 열지 않아도,", "잠금 화면에서 바로"],
+      lockDate: "10월 9일 금요일",
+      // Sample Live Activity values, matching the App Store screenshots.
+      liveActivity: {
+        workout: { mode: "AMRAP", time: "7:57", roundsLabel: "라운드", rounds: "3" },
+        currency: { from: "5,000 JPY", to: "46,850 KRW", step: "×1,000", minus: "-1,000", plus: "+1,000" },
+      },
+      comingSoon: "출시 예정",
+      viewSlider: "넘겨 보기",
+      viewGrid: "한눈에 보기",
+    },
     otherLocale: "English",
     appStore: "App Store에서 다운로드",
     appStoreBadge: {
@@ -63,20 +95,23 @@ export const ui = {
     searchEmpty: "검색 결과가 없습니다.",
     menu: "메뉴",
     contactTitle: "문의",
-    contactDescription: "버튼을 누르면 양식이 채워진 이메일이 열립니다. 문제를 확인할 수 있도록 각 항목을 적어 주세요.",
+    contactDescription:
+      "버튼을 누르면 양식이 채워진 이메일이 열립니다. 문제를 확인할 수 있도록 각 항목을 적어 주세요.",
     emailUs: "이메일 보내기",
     emailBody: "iPhone 모델:\niOS 버전:\n앱 버전:\n\n어떤 일이 있었나요:\n",
     apps: [
       {
         slug: "currency-converter",
         name: "환율계산기",
-        description: "Live Activity, Dynamic Island, Apple Watch에서 바로 환율을 계산하세요.",
+        description:
+          "해외여행 중에 환율을 쉽고 편리하게 확인해 보세요.",
         appStore: "https://apps.apple.com/kr/app/id6814764703",
       },
       {
         slug: "workout-timer",
         name: "운동 타이머",
-        description: "인터벌, 세트 휴식, AMRAP 타이머를 Live Activity, Dynamic Island, Apple Watch에서 조작하세요.",
+        description:
+          "인터벌, 세트 휴식, AMRAP 타이머를 간편하게 사용하세요.",
         appStore: "https://apps.apple.com/kr/app/id6829184635",
       },
     ],

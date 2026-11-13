@@ -23,7 +23,7 @@ Don't edit an app's pages (`src/content/docs/<app>/`, `src/content/docs/ko/<app>
 
 The App Store badge and the footer credit lines must follow Apple's [marketing guidelines](https://developer.apple.com/app-store/marketing/guidelines/) and [trademark guidelines](https://www.apple.com/legal/intellectual-property/guidelinesfor3rdparties.html), which can change. When working on either, check them against the current guidelines and update them if needed.
 
-- Credit lines, in both languages: `legal` in `src/i18n/ui.ts`, shown in the footer of `src/layouts/main.astro`. List every Apple trademark the site uses.
+- Credit lines, in both languages: `legal` in `src/i18n/ui.ts`, shown in the footer of `src/layouts/main.astro`. List every Apple trademark the site uses. The home page turns the footer off (`footer={false}`) for its design; it shows no App Store badge, so every page with the badge keeps the credit lines.
 - Badge artwork URLs and size: `appStoreBadge` in `src/i18n/ui.ts`. Never modify the artwork.
 
 ## Documentation

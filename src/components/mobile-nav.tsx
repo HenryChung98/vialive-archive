@@ -10,7 +10,8 @@ export function MobileNav({ title, children }: { title: string; children?: React
       <SheetTrigger render={<Button variant="ghost" size="icon-sm" aria-label={title} />}>
         <Menu />
       </SheetTrigger>
-      <SheetContent side="left">
+      {/* Keep the menu clear of the notch on a phone in landscape. */}
+      <SheetContent side="left" className="pl-[env(safe-area-inset-left)]">
         <SheetHeader>
           <SheetTitle>{title}</SheetTitle>
         </SheetHeader>

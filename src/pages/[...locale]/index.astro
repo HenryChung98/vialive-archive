@@ -1,14 +1,29 @@
 ---
 import Layout from "@/layouts/main.astro"
 import AppIcon from "@/components/app-icon.astro"
-import { Card, CardContent } from "@/components/ui/card"
+import LockScreen from "@/components/lock-screen.astro"
 import { locales, localeParam, ui, type Locale } from "@/i18n/ui"
 import { getRelativeLocaleUrl } from "astro:i18n"
+import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import { ArrowRight, GalleryHorizontal, LayoutGrid } from "lucide-react"
 
 export const getStaticPaths = () => locales.map((l) => ({ params: { locale: localeParam(l) } }))
 
 const locale = Astro.currentLocale as Locale
 const t = ui[locale]
+const home = t.home
+
+// Quick Launcher has no docs yet, so it is listed only on this page, not in ui.ts `apps`.
+const quickLauncher = { slug: "quick-launcher", name: { en: "Quick Launcher", ko: "퀵 런처" }[locale] }
+// Not on the App Store yet: the card shows "Coming soon" and doesn't link anywhere.
+const unreleased = ["workout-timer", "quick-launcher"]
+const apps = [...t.apps, quickLauncher].map((a) => ({
+  slug: a.slug,
+  name: a.name,
+  href: unreleased.includes(a.slug) ? undefined : getRelativeLocaleUrl(locale, a.slug),
+}))
+
 const jsonLd = {
   "@type": "WebSite",
   name: "Vialive",
@@ -18,30 +33,282 @@ const jsonLd = {
 }
 ---
 
-<Layout title={t.homeTitle} jsonLd={jsonLd}>
-  <section class="space-y-2">
-    <h1 class="text-3xl font-semibold tracking-tight">Vialive</h1>
-    <p class="text-muted-foreground">{t.tagline}</p>
-  </section>
+<Layout title={t.homeTitle} wide jsonLd={jsonLd} footer={false}>
+  <style is:global>
+    /* The page usually doesn't scroll, so a reserved scrollbar gutter would show as a strip beside the header. */
+    html {
+      scrollbar-gutter: auto;
+    }
+    body {
+      background: var(--muted);
+      /* The slider breaks out to the full window width; clip, not hidden, keeps the header sticky. */
+      overflow-x: clip;
+    }
+    /* Centre the slider below the header, so the page fits one screen on desktop. */
+    main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    /* Intro: shows once per tab session, then slides away. Pure CSS, so it also leaves without JS. */
+    .intro {
+      animation: intro-out 0.45s cubic-bezier(0.7, 0, 0.2, 1) 2.8s forwards;
+    }
+    .intro-in {
+      animation: intro-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+    @keyframes intro-out {
+      to {
+        transform: translateY(-100%);
+        visibility: hidden;
+      }
+    }
+    @keyframes intro-in {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+    }
+    .no-intro .intro {
+      display: none;
+    }
+    /* A short screen (a phone in landscape) can't fit the title above the phone, so it skips the intro. */
+    @media (prefers-reduced-motion: reduce), (height <= 30rem) {
+      .intro {
+        display: none;
+      }
+    }
+    /* Cards: Live Activities larger than on a real phone, so they, not the iPhone, catch the eye. Grows down from under the clock. */
+    [data-card] [data-activities] {
+      scale: 1.3;
+      transform-origin: top;
+    }
+    /* Fade the wallpaper rings so they don't compete with the activities. */
+    [data-card] [data-ring] {
+      filter: opacity(0.35);
+    }
+    /* Mobile grid view: every app at once instead of the slider. Desktop always shows the slider. */
+    @media (width < 40rem) {
+      [data-apps-view="grid"] [data-slider] {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-inline: 0;
+        padding-inline: 0;
+        overflow: visible;
+      }
+      [data-apps-view="grid"] [data-slider] > * {
+        width: auto;
+        max-width: none;
+      }
+      /* Skew and parallax belong to sliding; the script sets them inline, hence !important. */
+      [data-apps-view="grid"] :is([data-card], [data-parallax]) {
+        transform: none !important;
+      }
+      /* Half-width cards: smaller icon, the name may wrap, no arrow, phone moved down to clear the name. */
+      [data-apps-view="grid"] [data-card-head] {
+        gap: 0.5rem;
+        padding: 0.75rem;
+      }
+      [data-apps-view="grid"] [data-card-head] img {
+        width: 28px;
+        height: 28px;
+      }
+      [data-apps-view="grid"] [data-card-head] h2 {
+        font-size: 0.875rem;
+        line-height: 1.25;
+        white-space: normal;
+      }
+      [data-apps-view="grid"] [data-card-head] > svg {
+        display: none;
+      }
+      [data-apps-view="grid"] [data-parallax] {
+        top: 36%;
+      }
+    }
+  </style>
+  <script is:inline>
+    try {
+      if (sessionStorage.getItem("intro")) document.documentElement.classList.add("no-intro")
+      else sessionStorage.setItem("intro", "1")
+      // Apply the saved mobile view before first paint, so the grid doesn't flash as a slider.
+      if (localStorage.getItem("appsView") === "grid") document.documentElement.dataset.appsView = "grid"
+    } catch {}
+  </script>
 
-  <section class="mt-12 space-y-4">
-    <h2 class="text-lg font-medium">{t.appsHeading}</h2>
-    <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+  <!-- Intro screen (the old hero). -->
+  <div
+    aria-hidden="true"
+    class="intro fixed inset-0 z-50 flex flex-col items-center justify-center gap-8 overflow-hidden bg-muted px-4 text-center"
+  >
+    <p class="intro-in text-4xl font-bold tracking-tight text-balance sm:text-6xl">
+      {home.heroTitle[0]}<br />{home.heroTitle[1]}
+    </p>
+    <LockScreen intro class="w-[min(360px,70vw,calc((100svh-14rem)/2.1))] shrink-0" />
+  </div>
+
+  <section id="apps">
+    <!-- Mobile only: switch between the slider and a grid of every app. -->
+    <div role="group" aria-label={t.appsHeading} class="mb-2 flex justify-end gap-1 sm:hidden">
       {
-        t.apps.map((app) => (
-          <a
-            href={getRelativeLocaleUrl(locale, app.slug)}
-            class="group rounded-xl outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+        [
+          { view: "slider", label: home.viewSlider, Icon: GalleryHorizontal },
+          { view: "grid", label: home.viewGrid, Icon: LayoutGrid },
+        ].map(({ view, label, Icon }) => (
+          <button
+            type="button"
+            data-view={view}
+            aria-label={label}
+            aria-pressed={view === "slider" ? "true" : "false"}
+            class={cn(buttonVariants({ variant: "ghost", size: "icon" }), "text-muted-foreground aria-pressed:bg-background aria-pressed:text-foreground")}
           >
-            <Card className="h-full transition-colors group-hover:bg-muted/50">
-              <CardContent className="flex flex-col items-center gap-3 text-center">
-                <AppIcon slug={app.slug} size={80} />
-                <span class="font-medium">{app.name}</span>
-              </CardContent>
-            </Card>
-          </a>
+            <Icon />
+          </button>
         ))
+      }
+    </div>
+    <!-- Full-width horizontal track: native scroll (touch, trackpad, keyboard); the script adds wheel, drag, skew and parallax. -->
+    <div
+      data-slider
+      class="mx-[calc(50%-50vw)] flex cursor-grab gap-4 overflow-x-auto overscroll-x-contain pl-[max(1rem,env(safe-area-inset-left),calc(50vw-40rem+1rem))] pr-[max(1rem,env(safe-area-inset-right),calc(50vw-40rem+1rem))] pb-4 [scrollbar-width:none] active:cursor-grabbing max-sm:snap-x max-sm:snap-proximity sm:gap-6"
+    >
+      {
+        apps.map((app) => {
+          const Tag = app.href ? "a" : "div"
+          return (
+            <Tag
+              href={app.href}
+              draggable="false"
+              class:list={[app.href && "group", "w-[72vw] max-w-[min(340px,max(200px,calc((100svh-16rem)*0.8)))] shrink-0 snap-center outline-none sm:w-[30vw]"]}
+            >
+              <!-- Icon and name on top, a cropped iPhone below showing this app's Live Activity (empty Lock Screen if none yet). -->
+              <div
+                data-card
+                class="relative aspect-[4/5] overflow-hidden rounded-3xl bg-background transition-[scale] duration-300 will-change-transform group-hover:scale-[0.98] group-focus-visible:ring-3 group-focus-visible:ring-ring/50"
+              >
+                <div data-card-head class="absolute inset-x-0 top-0 flex items-center gap-3 p-4 sm:p-5">
+                  <AppIcon slug={app.slug} size={40} />
+                  <div class="min-w-0 flex-1">
+                    <h2 class="truncate font-semibold">{app.name}</h2>
+                    {!app.href && <p class="text-xs text-muted-foreground">{home.comingSoon}</p>}
+                  </div>
+                  {app.href && <ArrowRight className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1" />}
+                </div>
+                <div data-parallax class="absolute inset-x-0 top-[28%] flex justify-center">
+                  <LockScreen
+                    apps={[app.slug]}
+                    activitiesAt="middle"
+                    class="w-[54%] transition-transform duration-300 group-hover:-translate-y-2"
+                  />
+                </div>
+              </div>
+            </Tag>
+          )
+        })
       }
     </div>
   </section>
 </Layout>
+
+<script>
+  // Wheel → horizontal, mouse drag, and a velocity skew + icon parallax. Faster settle than the reference site.
+  const track = document.querySelector<HTMLElement>("[data-slider]")!
+  const cards = [...track.querySelectorAll<HTMLElement>("[data-card]")]
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches
+
+  // Vertical wheel scrolls the track until it hits an end, then the page scrolls on.
+  track.addEventListener(
+    "wheel",
+    (e) => {
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return
+      const max = track.scrollWidth - track.clientWidth
+      const from = easing ? target : track.scrollLeft
+      if ((e.deltaY > 0 && from < max - 1) || (e.deltaY < 0 && from > 0)) {
+        e.preventDefault()
+        // Firefox can report lines instead of pixels.
+        target = Math.max(0, Math.min(max, from + e.deltaY * (e.deltaMode === 1 ? 16 : 1)))
+        if (still) track.scrollLeft = target
+        else if (!easing) easing = requestAnimationFrame(ease)
+      }
+    },
+    { passive: false },
+  )
+
+  // Wheel glides: each frame closes 18% of the gap to the target. Higher = snappier, lower = floatier.
+  let target = 0, easing = 0
+  const ease = () => {
+    const gap = target - track.scrollLeft
+    if (Math.abs(gap) < 1) {
+      track.scrollLeft = target
+      easing = 0
+      return
+    }
+    // At least 1px, or a step that rounds to 0 would never arrive.
+    track.scrollLeft += Math.sign(gap) * Math.max(1, Math.abs(gap) * 0.18)
+    easing = requestAnimationFrame(ease)
+  }
+
+  // Mouse drag; a drag past a few pixels cancels the click so it doesn't open the app.
+  let startX = 0, startLeft = 0, dragged = false, down = false
+  track.addEventListener("pointerdown", (e) => {
+    if (e.pointerType !== "mouse") return
+    cancelAnimationFrame(easing); easing = 0
+    down = true; dragged = false; startX = e.clientX; startLeft = track.scrollLeft
+  })
+  addEventListener("pointermove", (e) => {
+    if (!down) return
+    const dx = e.clientX - startX
+    if (Math.abs(dx) > 5) dragged = true
+    track.scrollLeft = startLeft - dx
+  })
+  addEventListener("pointerup", () => (down = false))
+  track.addEventListener("click", (e) => dragged && e.preventDefault(), true)
+
+  // Mobile view switch. The inline script applies the saved choice before first paint; this keeps the buttons in sync.
+  const root = document.documentElement
+  const viewButtons = [...document.querySelectorAll<HTMLButtonElement>("[data-view]")]
+  const showView = (view: string) => {
+    if (view === "grid") root.dataset.appsView = "grid"
+    else delete root.dataset.appsView
+    for (const b of viewButtons) b.setAttribute("aria-pressed", String(b.dataset.view === view))
+  }
+  showView(root.dataset.appsView ?? "slider")
+  for (const b of viewButtons)
+    b.addEventListener("click", () => {
+      showView(b.dataset.view!)
+      try {
+        localStorage.setItem("appsView", b.dataset.view!)
+      } catch {}
+      // Card positions changed, so let the parallax re-measure.
+      dispatchEvent(new Event("resize"))
+    })
+
+  if (!still) {
+    const layers = cards.map((c) => c.querySelector<HTMLElement>("[data-parallax]")!)
+    // Card centres in track coordinates, measured once (and on resize) so the scroll loop never forces a layout.
+    // Skew and hover scale keep a card's centre in place, so measuring mid-animation is fine.
+    let centres: number[] = []
+    const measure = () => (centres = cards.map((c) => {
+      const r = c.getBoundingClientRect()
+      return r.left + r.width / 2 + track.scrollLeft
+    }))
+    let last = track.scrollLeft, skew = 0, frame = 0
+    const tick = () => {
+      const v = track.scrollLeft - last
+      last = track.scrollLeft
+      skew += (Math.max(-8, Math.min(8, v * 0.25)) - skew) * 0.3
+      const w = innerWidth
+      cards.forEach((card, i) => {
+        card.style.transform = `skewX(${-skew}deg)`
+        layers[i].style.transform = `translateX(${((centres[i] - last - w / 2) / w) * -40}px)`
+      })
+      frame = Math.abs(skew) > 0.05 || v !== 0 ? requestAnimationFrame(tick) : 0
+    }
+    track.addEventListener("scroll", () => frame || (frame = requestAnimationFrame(tick)), { passive: true })
+    addEventListener("resize", () => {
+      measure()
+      frame ||= requestAnimationFrame(tick)
+    })
+    measure()
+    tick()
+  }
+</script>
