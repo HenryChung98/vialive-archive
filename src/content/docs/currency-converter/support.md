@@ -49,7 +49,7 @@ The Apple Watch app is part of **Currency Converter Plus** and needs watchOS 26 
 - Representative: Henry Chung
 - Business registration number: 478-18-02792
 - Email: henrychung.dev@gmail.com
-- Hosting provider: GitHub (GitHub Pages)
+- Hosting provider: Cloudflare (Cloudflare Workers)
 
 ## Frequently asked questions
 

@@ -10,7 +10,7 @@ Built with [Astro](https://astro.build) and [shadcn/ui](https://ui.shadcn.com).
 | `/<app>/policy/`, `/<app>/support/` | `src/content/docs/<app>/*.md`, rendered with `src/layouts/doc.astro` (search, sidebar, on-this-page card) |
 | `/ko/...` | Korean version of every page above; docs live in `src/content/docs/ko/` |
 | `/app-ads.txt` | `public/app-ads.txt` — AdMob verification, do not move or rename |
-| — | `public/CNAME` — custom domain, keep in sync with `site` in `astro.config.mjs` |
+| — | `wrangler.toml` — Cloudflare hosting; its `routes` entry is the custom domain, keep in sync with `site` in `astro.config.mjs` |
 
 App names, descriptions, App Store links and UI text live in `src/i18n/ui.ts`.
 
@@ -52,12 +52,13 @@ English is the default and lives at the root; Korean lives under `/ko/`. Locales
 
 ## Deployment
 
-`.github/workflows/deploy.yml` builds and deploys to GitHub Pages on every push to `main`.
+The site is served by Cloudflare as a Worker with static assets (`vialive-site`, configured in `wrangler.toml`). `.github/workflows/deploy.yml` builds it and runs `wrangler deploy` on every push to `main`; it can also be run by hand from the Actions tab. To deploy from your machine instead, log in once with `pnpm exec wrangler login` and run `pnpm run deploy`.
+
+`wrangler.toml` also attaches the custom domain `vialive.app`: Cloudflare creates its DNS record and certificate, so there is nothing to set at the registrar.
 
 One-time setup:
 
-1. Repository **Settings → Pages → Source**: *GitHub Actions*.
-2. **Settings → Pages → Custom domain**: `vialive.app`, then turn on *Enforce HTTPS* once the certificate is issued.
-3. At the domain registrar, point the apex domain at GitHub Pages:
-   `A` records `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   (and optionally `AAAA` records `2606:50c0:8000::153` … `2606:50c0:8003::153`).
+1. In Cloudflare, create an API token from the *Edit Cloudflare Workers* template, limited to this account and the `vialive.app` zone, with **Zone → DNS → Edit** added so the deploy can manage the custom domain's record.
+2. In this repository's **Settings → Secrets and variables → Actions**, add `CLOUDFLARE_API_TOKEN` (the token) and `CLOUDFLARE_ACCOUNT_ID` (shown on the Cloudflare dashboard's account home).
+
+To check a build the way Cloudflare serves it (trailing-slash redirects, the 404 page), run `pnpm build && pnpm exec wrangler dev`.
