@@ -16,7 +16,7 @@ const { Content, headings } = await render(entry)
 const { locale, app: appSlug } = parseDocId(entry.id)
 const app = ui[locale].apps.find((a) => a.slug === appSlug)
 // Every app's support.md gets the contact card, and its "### question" sections become an accordion,
-// which already lists every question, so the page skips the on-this-page card.
+// which already lists every question, so the on-this-page card lists only the "##" sections.
 const isSupport = entry.id.endsWith("/support")
 const faq = isSupport ? splitFaq(entry.rendered?.html ?? "") : undefined
 const jsonLd = faq && {
@@ -30,7 +30,7 @@ const jsonLd = faq && {
 }
 ---
 
-<DocLayout title={entry.data.title} description={entry.data.description} headings={faq ? [] : headings} jsonLd={jsonLd}>
+<DocLayout title={entry.data.title} description={entry.data.description} headings={faq ? headings.filter((h) => h.depth === 2) : headings} jsonLd={jsonLd}>
   <h1>{entry.data.title}</h1>
   {
     faq ? (
