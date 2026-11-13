@@ -5,7 +5,7 @@ order: 2
 label: Privacy Policy
 ---
 
-**Effective date:** 2026-11-02
+**Effective date:** 2026-11-13
 
 This page explains what data Currency Converter ("the App", "we", "us") and its third-party services collect and how it's used.
 
@@ -45,6 +45,14 @@ The App is not directed at children under 13, and we do not knowingly collect pe
 ## Data retention
 
 We do not operate a backend or account system, so we do not retain your personal data. Data collected by Google AdMob is retained and processed according to Google's own privacy policy, linked above.
+
+## Privacy officer
+
+- Name: Henry Chung
+- Title: Representative
+- Email: henrychung.dev@gmail.com
+
+To request access to, correction of, or deletion of your personal information, email the privacy officer. The App keeps its data only on your device (and your paired Apple Watch), so deleting the App also deletes it. For data collected by Google AdMob, use the Google settings under [Your choices](#your-choices) above.
 
 ## Changes to this policy
 
