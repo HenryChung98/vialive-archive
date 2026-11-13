@@ -5,7 +5,7 @@ order: 2
 label: Privacy Policy
 ---
 
-**Effective date:** 2026-11-02
+**Effective date:** 2026-11-13
 
 This page explains what data Workout Timer ("the App", "we", "us") and its third-party services collect and how it's used.
 
@@ -20,7 +20,7 @@ If you buy **Workout Timer Plus**, Apple processes the purchase through the App 
 With Workout Timer Plus, a running timer is shown as a Live Activity, and also in the Dynamic Island on supported iPhones. So that the Live Activity switches segments on time even while the App is in the background, the App sends our push server the following when you start, pause, or reset a timer:
 
 - The Live Activity's push token, issued by Apple for that Live Activity only
-- The times the upcoming segments start, and what the Live Activity shows at each of them (timer type, remaining time, round)
+- The times the upcoming segments start, and what the Live Activity shows at each of them (timer type, remaining time, round, color theme)
 
 The server sends these updates to the Live Activity through Apple Push Notification service at the scheduled times. They contain no personal or device-identifying information, and the server deletes them after the last update is sent or when you pause or reset the timer. Free users don't use the Live Activity, so nothing is sent.
 
@@ -57,6 +57,14 @@ The App is not directed at children under 13, and we do not knowingly collect pe
 ## Data retention
 
 We do not operate an account system, so we do not retain your personal data. Scheduled Live Activity updates are kept on our push server only until they are sent or cancelled, as described above. Data collected by Google AdMob is retained and processed according to Google's own privacy policy, linked above.
+
+## Privacy officer
+
+- Name: Henry Chung
+- Title: Representative
+- Email: henrychung.dev@gmail.com
+
+To request access to, correction of, or deletion of your personal information, email the privacy officer. The App keeps your timers and settings only on your device (and your paired Apple Watch), so deleting the App also deletes them. For data collected by Google AdMob, use the Google settings under [Your choices](#your-choices) above.
 
 ## Changes to this policy
 

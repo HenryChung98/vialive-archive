@@ -15,6 +15,46 @@ Choose a timer type at the top of the main screen. To change a timer's times, ta
 
 A beep sounds every second for the last 5 seconds of each segment, and a longer sound plays when the next segment starts. Sounds keep playing when the screen is locked or you switch to another app, and they play over your music without lowering it.
 
+## Live Activities
+
+With **Workout Timer Plus**, the timer appears as a Live Activity when you open the app, and also in the Dynamic Island on supported iPhones. From the Live Activity, you can play or pause the timer and, for AMRAP, add a round. It shows the remaining time, plus the round and total time left for Interval and the round count for AMRAP.
+
+The Live Activity uses an internet connection to switch segments on time. Without a connection, it may update late, but the timer, sounds, and vibration keep working.
+
+If the Live Activity doesn't appear, make sure Live Activities are allowed in **Settings → Workout Timer → Live Activities**.
+
+While you use the Live Activity's buttons with your iPhone locked, iOS may turn off the display after a few seconds. This is an iOS limitation. Thank you for your understanding.
+
+## Workout Timer Plus
+
+**Workout Timer Plus** is a one-time purchase. To buy it, tap **Settings** (top-left of the main screen) → **Upgrade to Plus**.
+
+- **Save multiple timers in a list**: Without Plus, each timer type has one timer. With Plus, tap **+** to save up to 30 for each type, tap one to open it, and swipe left to delete it.
+- **Control timers with Live Activities**: Play, pause, and add rounds from the Live Activity and the Dynamic Island.
+- **Vibration and sound volume settings**: In **Settings**, turn on **Vibration** when each segment starts or ends, and adjust the **Sound Volume**. Sound volume also follows the device volume.
+- **Apple Watch Support (watchOS 26 or later)**: Run, add, and edit timers on your Apple Watch, even without your iPhone nearby.
+- No ads.
+
+If you reinstall the App or use a new device, tap **Restore Purchases** on the same screen.
+
+## Apple Watch
+
+The Apple Watch app is part of **Workout Timer Plus** and needs watchOS 26 or later. Without Plus, it asks you to upgrade on your iPhone. If Workout Timer isn't on your Apple Watch, open the Watch app on your iPhone and install it from **Available Apps**. Open Workout Timer on your iPhone once so your Apple Watch gets your timers.
+
+- Choose **Interval**, **Rest**, or **AMRAP**, then tap a saved timer to open it. Tap **+** to add a timer, swipe left to delete one, and tap ✏️ on the timer screen to edit it.
+- The timer screen works like the iPhone's: the remaining time, the round and total time left for Interval, and the round count for AMRAP, with a green screen during workouts and blue during the cooldown.
+- Instead of sounds, your Apple Watch taps your wrist every second for the last 5 seconds of each segment, and with a stronger tap when the next segment starts or the workout ends.
+- Your saved timers stay in sync between your iPhone and Apple Watch, so a timer you add, edit, or delete on one appears on the other. Changes appear right away while the other device's app is open, or the next time you open it. If you change timers on both devices while they're not connected, the list you changed last is kept.
+- Each device runs its own timer. A timer you start on your Apple Watch runs on your Apple Watch, so you can work out without your iPhone.
+
+## Business information
+
+- Business name: Henry Chung Studio
+- Representative: Henry Chung
+- Business registration number: 478-18-02792
+- Email: henrychung.dev@gmail.com
+- Hosting provider: GitHub (GitHub Pages)
+
 ## Frequently asked questions
 
 ### How do I add the widget?
@@ -24,16 +64,6 @@ A beep sounds every second for the last 5 seconds of each segment, and a longer 
 3. Search for **Workout Timer**, choose the widget, and tap **Add Widget**.
 
 You can also add it to your Lock Screen: touch and hold the Lock Screen, tap **Customize → Lock Screen**, then tap the widget area. The widget shows the timer type you last selected; tap it to open the app.
-
-### How do I control the timer with Live Activities?
-
-With **Workout Timer Plus**, the timer appears as a Live Activity when you open the app, and also in the Dynamic Island on supported iPhones. From the Live Activity, you can play or pause the timer and, for AMRAP, add a round. It shows the remaining time, plus the round and total time left for Interval and the round count for AMRAP.
-
-The Live Activity uses an internet connection to switch segments on time. Without a connection, it may update late, but the timer, sounds, and vibration keep working.
-
-If the Live Activity doesn't appear, make sure Live Activities are allowed in **Settings → Workout Timer → Live Activities**.
-
-While you use the Live Activity's buttons with your iPhone locked, iOS may turn off the display after a few seconds. This is an iOS limitation. Thank you for your understanding.
 
 ### Why does the Live Activity turn off after 8 hours?
 
@@ -51,30 +81,14 @@ Ads are hidden while a timer is running. With **Workout Timer Plus**, the App sh
 
 For more about the data involved, see the [Workout Timer Privacy Policy](/workout-timer/policy/).
 
-### What does Workout Timer Plus include?
-
-**Workout Timer Plus** is a one-time purchase. To buy it, tap **Settings** (top-left of the main screen) → **Upgrade to Plus**.
-
-- **Save multiple timers in a list**: Without Plus, each timer type has one timer. With Plus, tap **+** to save up to 30 for each type, tap one to open it, and swipe left to delete it.
-- **Control timers with Live Activities**: Play, pause, and add rounds from the Live Activity and the Dynamic Island.
-- **Vibration and sound volume settings**: In **Settings**, turn on **Vibration** when each segment starts or ends, and adjust the **Sound Volume**. Sound volume also follows the device volume.
-- **Apple Watch Support (watchOS 26 or later)**: Run, add, and edit timers on your Apple Watch, even without your iPhone nearby.
-- No ads.
-
-If you reinstall the App or use a new device, tap **Restore Purchases** on the same screen.
-
-### How do I use Workout Timer on Apple Watch?
-
-The Apple Watch app is part of **Workout Timer Plus** and needs watchOS 26 or later. Without Plus, it asks you to upgrade on your iPhone. If Workout Timer isn't on your Apple Watch, open the Watch app on your iPhone and install it from **Available Apps**. Open Workout Timer on your iPhone once so your Apple Watch gets your timers.
-
-- Choose **Interval**, **Rest**, or **AMRAP**, then tap a saved timer to open it. Tap **+** to add a timer, swipe left to delete one, and tap ✏️ on the timer screen to edit it.
-- The timer screen works like the iPhone's: the remaining time, the round and total time left for Interval, and the round count for AMRAP, with a green screen during workouts and blue during the cooldown.
-- Instead of sounds, your Apple Watch taps your wrist every second for the last 5 seconds of each segment, and with a stronger tap when the next segment starts or the workout ends.
-- Your saved timers stay in sync between your iPhone and Apple Watch, so a timer you add, edit, or delete on one appears on the other. Changes appear right away while the other device's app is open, or the next time you open it. If you change timers on both devices while they're not connected, the list you changed last is kept.
-- Each device runs its own timer. A timer you start on your Apple Watch runs on your Apple Watch, so you can work out without your iPhone.
-
 ### Why does Workout Timer ask for Health access on Apple Watch?
 
 The first time you play a timer on your Apple Watch, Workout Timer explains why it asks for Health access and then shows Apple's permission screen. While a timer is playing, the App runs it as a workout so it keeps running and tapping your wrist on time after you lower your wrist. Starting a workout requires this permission.
 
 Workout Timer doesn't read or save any health data, and no workouts are added to the Health or Fitness app. If you don't allow it, the timer still works, but it may tap late after you lower your wrist. You can change this anytime on your iPhone in **Settings → Privacy & Security → Health → Workout Timer**.
+
+### How do I get a refund?
+
+**Workout Timer Plus** is sold and refunded by Apple through the App Store, so we can't issue refunds directly. To request one, go to Apple's [Report a Problem](https://reportaproblem.apple.com/) page, sign in with your Apple Account, and choose the purchase. Apple decides each request under its own refund policy.
+
+If Plus is missing after you reinstall the App or switch devices, you don't need a refund: tap **Settings** → **Upgrade to Plus** → **Restore Purchases**.

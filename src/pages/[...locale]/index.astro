@@ -17,7 +17,7 @@ const home = t.home
 // Quick Launcher has no docs yet, so it is listed only on this page, not in ui.ts `apps`.
 const quickLauncher = { slug: "quick-launcher", name: { en: "Quick Launcher", ko: "퀵 런처" }[locale] }
 // Not on the App Store yet: the card shows "Coming soon" and doesn't link anywhere.
-const unreleased = ["workout-timer", "quick-launcher"]
+const unreleased = ["quick-launcher"]
 const apps = [...t.apps, quickLauncher].map((a) => ({
   slug: a.slug,
   name: a.name,
