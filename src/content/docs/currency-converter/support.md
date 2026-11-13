@@ -5,6 +5,52 @@ order: 1
 label: Support
 ---
 
+## Exchange rates
+
+Rates are European Central Bank reference rates, provided by [Frankfurter](https://frankfurter.dev). They are published once per business day, usually around 16:00 Central European Time, and are not updated on weekends or public holidays.
+
+- Currency Converter downloads the latest rates when you open the app.
+- To refresh manually, tap the date next to **Rates as of** below the conversion.
+- The widget and the Live Activity use the rates the app last downloaded.
+- Your most recent rates are saved on your device, so conversions keep working offline.
+
+Rates are for reference only. Rates used by banks and card companies for actual transactions may differ.
+
+## Widgets
+
+The widget shows your most recent conversion. Tap the swap button to switch the two currencies. The medium widget also lets you adjust the amount and the step size (×1 to ×1,000). To choose different currencies, open the app. With **Currency Converter Plus**, the widget and the Live Activity also show a **Next Currency Pair** button that switches to your next favorite pair.
+
+## Currency Converter Plus
+
+**Currency Converter Plus** is a one-time purchase. To buy it, tap **Settings** (top-left of the main screen) → **Upgrade to Plus**.
+
+- **Favorites**: Tap ☆ to save the current currency pair (up to 30), then tap a saved pair to switch to it. Use **Edit Favorites** to delete or reorder pairs.
+- **Next Currency Pair**: Switch to your next favorite pair from the Live Activity and the widget. To hide the button on the Live Activity, turn off **Pair Switch Button** in **Settings**.
+- **Decimal Places**: Choose Auto, 0, 2, or 4 decimal places for converted amounts in **Settings**.
+- **Apple Watch Support (watchOS 26 or later)**: Convert on your Apple Watch, even without your iPhone nearby.
+- No ads.
+
+If you reinstall the App or use a new device, tap **Restore Purchases** on the same screen.
+
+## Apple Watch
+
+The Apple Watch app is part of **Currency Converter Plus** and needs watchOS 26 or later. Without Plus, it asks you to upgrade on your iPhone. If Currency Converter isn't on your Apple Watch, open the Watch app on your iPhone and install it from **Available Apps**. Open Currency Converter on your iPhone once so your Apple Watch gets exchange rates.
+
+- Turn the Digital Crown to change the amount by the current step. Tap the step button below the result to switch between ×1, ×10, ×100, and ×1,000.
+- Tap the amount to type it on a keypad.
+- Tap a currency to choose another one, or tap ⇄ to swap them. Your favorite pairs are at the top of the list, and the → button switches to your next favorite pair.
+- The amount, currencies, and step stay in sync between your iPhone and Apple Watch, and the one you changed last is kept. Changes appear on the other device right away while its app is open, or the next time you open it.
+- Your Apple Watch keeps the rates your iPhone last downloaded, so it works without your iPhone nearby. The date below the result shows which day's rates it uses. To get newer rates, open Currency Converter on your iPhone.
+- Favorites and settings are changed in the iPhone app.
+
+## Business information
+
+- Business name: Henry Chung Studio
+- Representative: Henry Chung
+- Business registration number: 478-18-02792
+- Email: henrychung.dev@gmail.com
+- Hosting provider: GitHub (GitHub Pages)
+
 ## Frequently asked questions
 
 ### How do I add the widget?
@@ -12,8 +58,6 @@ label: Support
 1. Touch and hold an empty area of your Home Screen until the apps start to jiggle.
 2. Tap **Edit → Add Widget** (or the **+** button) in the top-left corner.
 3. Search for **Currency**, choose the small or medium size, and tap **Add Widget**.
-
-The widget shows your most recent conversion. Tap the swap button to switch the two currencies. The medium widget also lets you adjust the amount and the step size (×1 to ×1,000). To choose different currencies, open the app. With **Currency Converter Plus**, the widget and the Live Activity also show a **Next Currency Pair** button that switches to your next favorite pair.
 
 ### Why does the Live Activity turn off after 8 hours, and how do I turn it back on?
 
@@ -35,17 +79,6 @@ If the Live Activity doesn't appear at all, make sure Live Activities are allowe
 
 While you use the Live Activity's buttons with your iPhone locked, iOS may also turn off the display after a few seconds. This is also an iOS limitation. Thank you for your understanding.
 
-### How often are exchange rates updated?
-
-Rates are European Central Bank reference rates, provided by [Frankfurter](https://frankfurter.dev). They are published once per business day, usually around 16:00 Central European Time, and are not updated on weekends or public holidays.
-
-- Currency Converter downloads the latest rates when you open the app.
-- To refresh manually, tap the date next to **Rates as of** below the conversion.
-- The widget and the Live Activity use the rates the app last downloaded.
-- Your most recent rates are saved on your device, so conversions keep working offline.
-
-Rates are for reference only. Rates used by banks and card companies for actual transactions may differ.
-
 ### How do I change ad tracking or consent settings?
 
 - **Tracking (all regions)**: Go to **Settings → Privacy & Security → Tracking** and turn **Currency** on or off. If tracking is off, you still see ads, but they are not personalized.
@@ -56,25 +89,8 @@ With **Currency Converter Plus**, the App shows no ads, so it doesn't ask for tr
 
 For more about the data involved, see the [Currency Converter Privacy Policy](/currency-converter/policy/).
 
-### What does Currency Converter Plus include?
+### How do I get a refund?
 
-**Currency Converter Plus** is a one-time purchase. To buy it, tap **Settings** (top-left of the main screen) → **Upgrade to Plus**.
+**Currency Converter Plus** is sold and refunded by Apple through the App Store, so we can't issue refunds directly. To request one, go to Apple's [Report a Problem](https://reportaproblem.apple.com/) page, sign in with your Apple Account, and choose the purchase. Apple decides each request under its own refund policy.
 
-- **Favorites**: Tap ☆ to save the current currency pair (up to 30), then tap a saved pair to switch to it. Use **Edit Favorites** to delete or reorder pairs.
-- **Next Currency Pair**: Switch to your next favorite pair from the Live Activity and the widget.
-- **Decimal Places**: Choose Auto, 0, 2, or 4 decimal places for converted amounts in **Settings**.
-- **Apple Watch Support (watchOS 26 or later)**: Convert on your Apple Watch, even without your iPhone nearby.
-- No ads.
-
-If you reinstall the App or use a new device, tap **Restore Purchases** on the same screen.
-
-### How do I use Currency Converter on Apple Watch?
-
-The Apple Watch app is part of **Currency Converter Plus** and needs watchOS 26 or later. Without Plus, it asks you to upgrade on your iPhone. If Currency Converter isn't on your Apple Watch, open the Watch app on your iPhone and install it from **Available Apps**. Open Currency Converter on your iPhone once so your Apple Watch gets exchange rates.
-
-- Turn the Digital Crown to change the amount by the current step. Tap the step button below the result to switch between ×1, ×10, ×100, and ×1,000.
-- Tap the amount to type it on a keypad.
-- Tap a currency to choose another one, or tap ⇄ to swap them. Your favorite pairs are at the top of the list, and the → button switches to your next favorite pair.
-- The amount, currencies, and step stay in sync between your iPhone and Apple Watch, and the one you changed last is kept. Changes appear on the other device right away while its app is open, or the next time you open it.
-- Your Apple Watch keeps the rates your iPhone last downloaded, so it works without your iPhone nearby. The date below the result shows which day's rates it uses. To get newer rates, open Currency Converter on your iPhone.
-- Favorites and settings are changed in the iPhone app.
+If Plus is missing after you reinstall the App or switch devices, you don't need a refund: tap **Settings** → **Upgrade to Plus** → **Restore Purchases**.
