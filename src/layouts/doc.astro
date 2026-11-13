@@ -11,14 +11,15 @@ interface Props {
   title: string
   description: string
   headings: MarkdownHeading[]
+  jsonLd?: Record<string, unknown>
 }
 
-const { title, description, headings } = Astro.props
+const { title, description, headings, jsonLd } = Astro.props
 const t = ui[Astro.currentLocale as Locale]
 ---
 
 <!-- Doc pages (every md file) get search, the app sidebar, and an on-this-page card; app overview pages use main.astro alone. -->
-<Layout title={title} description={description} wide>
+<Layout title={title} description={description} jsonLd={jsonLd} wide>
   <Search slot="header" client:idle label={t.search} empty={t.searchEmpty} />
   <div slot="header" class="lg:hidden">
     <MobileNav client:load title={t.menu}><Sidebar /></MobileNav>

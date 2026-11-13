@@ -15,6 +15,8 @@ interface Props {
   wide?: boolean
   // False for a page with no URL of its own in each locale (404): no canonical, hreflang or language toggle.
   localized?: boolean
+  // schema.org structured data, rendered as JSON-LD.
+  jsonLd?: Record<string, unknown>
 }
 
 const siteName = "Vialive"
@@ -22,7 +24,7 @@ const ogLocales = { en: "en_US", ko: "ko_KR" }
 
 const locale = (Astro.currentLocale ?? "en") as Locale
 const t = ui[locale]
-const { title, description = t.tagline, wide = false, localized = true } = Astro.props
+const { title, description = t.tagline, wide = false, localized = true, jsonLd } = Astro.props
 const width = wide ? "max-w-7xl" : "max-w-3xl"
 const fullTitle = title && title !== siteName ? `${title} | ${siteName}` : siteName
 
@@ -41,6 +43,7 @@ const image = new URL("/og.png", Astro.site).href
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    {!localized && <meta name="robots" content="noindex" />}
     <link rel="sitemap" href="/sitemap-index.xml" />
     {
       localized && (
@@ -60,9 +63,28 @@ const image = new URL("/og.png", Astro.site).href
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={siteName} />
     <meta property="og:locale" content={ogLocales[locale]} />
     {locales.filter((l) => l !== locale).map((l) => <meta property="og:locale:alternate" content={ogLocales[l]} />)}
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    {
+      jsonLd && (
+        <script
+          is:inline
+          type="application/ld+json"
+          set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            ...jsonLd,
+            publisher: { "@type": "Organization", name: siteName, url: Astro.site!.href },
+          })}
+        />
+      )
+    }
   </head>
   <body class="flex min-h-svh flex-col">
     <header class="sticky top-0 z-40 border-b bg-background/80 backdrop-blur">

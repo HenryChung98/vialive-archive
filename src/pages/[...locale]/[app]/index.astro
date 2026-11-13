@@ -3,6 +3,8 @@ import Layout from "@/layouts/main.astro"
 import AppIcon from "@/components/app-icon.astro"
 import { Card, CardAction, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { locales, localeParam, ui, type Locale } from "@/i18n/ui"
+import { appIcons } from "@/lib/app-icons"
+import { getImage } from "astro:assets"
 import { getRelativeLocaleUrl } from "astro:i18n"
 import { ChevronRight, LifeBuoy, ShieldCheck } from "lucide-react"
 
@@ -16,9 +18,23 @@ const links = [
   { page: "support", title: t.support, hint: t.supportHint, Icon: LifeBuoy },
   { page: "policy", title: t.privacy, hint: t.privacyHint, Icon: ShieldCheck },
 ]
+const icon = await getImage({ src: appIcons[app.slug], width: 512, height: 512 })
+const jsonLd = {
+  "@type": "MobileApplication",
+  name: app.name,
+  description: app.description,
+  url: new URL(Astro.url.pathname, Astro.site).href,
+  image: new URL(icon.src, Astro.site).href,
+  downloadUrl: app.appStore,
+  applicationCategory: "UtilitiesApplication",
+  operatingSystem: "iOS",
+  inLanguage: locale,
+  // Free download; Plus is an in-app purchase.
+  offers: { "@type": "Offer", price: 0, priceCurrency: "USD" },
+}
 ---
 
-<Layout title={app.name} description={app.description}>
+<Layout title={app.name} description={app.description} jsonLd={jsonLd}>
   <section class="flex flex-col items-center gap-5 text-center sm:flex-row sm:items-start sm:gap-6 sm:text-left">
     <AppIcon slug={app.slug} size={112} />
     <div class="w-full min-w-0 space-y-2">

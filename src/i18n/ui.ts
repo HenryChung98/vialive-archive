@@ -2,6 +2,7 @@ export const contactEmail = "henrychung.dev@gmail.com"
 
 export const ui = {
   en: {
+    homeTitle: "iPhone Apps for Live Activities",
     tagline: "Privacy Policy and Support for our apps for iPhone with Live Activities",
     appsHeading: "Apps",
     otherLocale: "한국어",
@@ -42,6 +43,7 @@ export const ui = {
     ],
   },
   ko: {
+    homeTitle: "Live Activity 아이폰 앱",
     tagline: "Live Activities를 지원하는 iPhone용 앱의 개인정보 처리방침과 지원 페이지입니다.",
     appsHeading: "앱",
     otherLocale: "English",
