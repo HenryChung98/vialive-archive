@@ -1,6 +1,6 @@
 ---
 title: Currency Converter Support
-description: Contact details and answers to common questions about Currency Converter.
+description: A guide to using Currency Converter and its features.
 order: 1
 label: Support
 ---

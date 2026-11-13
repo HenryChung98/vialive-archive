@@ -1,6 +1,6 @@
 ---
 title: 환율계산기 지원
-description: 환율계산기 문의 방법과 자주 묻는 질문입니다.
+description: 환율계산기 사용법과 기능에 대한 안내입니다.
 order: 1
 label: 지원
 ---

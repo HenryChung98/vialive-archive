@@ -1,6 +1,6 @@
 ---
 title: Workout Timer Support
-description: Contact details and answers to common questions about Workout Timer.
+description: A guide to using Workout Timer and its features.
 order: 1
 label: Support
 ---
